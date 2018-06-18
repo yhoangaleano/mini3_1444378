@@ -2,6 +2,8 @@
 
 namespace Mini\Controller;
 
+use Mini\Model\Paciente;
+
 class PacientesController
 {
     public function index(){
@@ -14,7 +16,17 @@ class PacientesController
     }
 
     public function guardar(){
-        
+
+            if(isset($_POST['btnGuardar'])){
+
+                $pacienteModel = new Paciente();
+                $pacienteModel->addPaciente( $_POST['txtNombre'], $_POST['txtApellido'], $_POST['txtEPSPaciente'], $_POST['txtDocumento']);
+    
+            }
+    
+            header('location:'.URL.'pacientes/index');
+
+
     }
 
     public function actualizar(){

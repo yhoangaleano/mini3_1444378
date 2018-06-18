@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     
-  <form class="form-horizontal">
+  <form class="form-horizontal" method="POST" action="<?php echo URL; ?>pacientes/guardar">
 <fieldset>
 
 <!-- Form Name -->
@@ -40,7 +40,7 @@
   </div>
 
   <div class="col-md-6">
-    <button id="btnCancelar" name="btnCancelar" class="btn btn-default btn-block">Cancelar</button>
+    <button id="btnCancelar" name="btnCancelar" class="btn btn-default btn-block" type="reset">Cancelar</button>
   </div>
 
   </div>

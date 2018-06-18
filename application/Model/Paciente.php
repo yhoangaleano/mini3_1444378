@@ -57,21 +57,31 @@ class Paciente extends Model
      */
     public function addPaciente($p_nombrePaciente, $p_apellidoPaciente, $p_epsPaciente, $p_documentoPaciente)
     {
-        $sql = "CALL SP_Agregar_Paciente(:p_nombrePaciente, :p_apellidoPaciente, :p_epsPaciente, :p_documentoPaciente)";
 
-        $query = $this->db->prepare($sql);
+        try {
 
-        $parameters = array(
-            ':p_nombrePaciente' => $p_nombrePaciente, 
-            ':p_apellidoPaciente' => $p_apellidoPaciente, 
-            ':p_epsPaciente' => $p_epsPaciente, 
-            ':p_documentoPaciente' => $p_documentoPaciente
-        );
+            $sql = "CALL SP_Agregar_Paciente(:p_nombrePaciente, :p_apellidoPaciente, :p_epsPaciente, :p_documentoPaciente)";
+
+            $query = $this->db->prepare($sql);
+
+            $parameters = array(
+                ':p_nombrePaciente' => $p_nombrePaciente,
+                ':p_apellidoPaciente' => $p_apellidoPaciente,
+                ':p_epsPaciente' => $p_epsPaciente,
+                ':p_documentoPaciente' => $p_documentoPaciente
+            );
 
         // useful for debugging: you can see the SQL behind above construction by using:
         //echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
-        $query->execute($parameters);
+            $query->execute($parameters);
+
+        } catch (PDOException $e) {
+            
+            throw new $e->getCode();
+
+        }
+
     }
 
     /**
@@ -141,9 +151,9 @@ class Paciente extends Model
         $query = $this->db->prepare($sql);
 
         $parameters = array(
-            ':p_nombrePaciente' => $p_nombrePaciente, 
-            ':p_apellidoPaciente' => $p_apellidoPaciente, 
-            ':p_epsPaciente' => $p_epsPaciente, 
+            ':p_nombrePaciente' => $p_nombrePaciente,
+            ':p_apellidoPaciente' => $p_apellidoPaciente,
+            ':p_epsPaciente' => $p_epsPaciente,
             ':p_documentoPaciente' => $p_documentoPaciente,
             ':p_estadoPaciente' => $p_estadoPaciente,
             ':p_idPaciente' => $p_idPaciente
